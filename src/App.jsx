@@ -23,10 +23,18 @@ const App = () => {
     reminder: true
   }
 ])
+
+  // functionality for deleting a task
+  const deleteTask = (id) => {
+    console.log('inside delete method')
+    setTasks(tasks.filter((taskInList) => taskInList.id !== id))
+  }
+
+
   return (
     <div className="container">
       <Header />
-      <Task tasks={tasks}/>
+      <Task tasks={tasks} onDelete={deleteTask}/>
     </div>
   );
 }
