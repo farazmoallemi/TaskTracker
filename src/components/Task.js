@@ -1,9 +1,8 @@
-import React from 'react'
-
-const Task = () => {
+const Task = ({ task }) => {
   return (
-    <div className>
-      
+    <div className='task'>
+      <h3>{task.text}</h3>
+      <p>Deadline is: {task.day}</p>
     </div>
   )
 }

@@ -1,10 +1,10 @@
-
+import Task from "./Task"
 
 const Tasks = ({ tasks }) => {
   return (
     <div>
       {tasks.map((taskObject) =>
-        <h3 key={taskObject.id}>{taskObject.text}</h3>
+        <Task key={taskObject.id} task={taskObject}/>
       )}
     </div>
   )
