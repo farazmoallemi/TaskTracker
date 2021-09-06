@@ -15,7 +15,7 @@
     {
       "text": "potato",
       "day": "tont",
-      "reminder": false,
+      "reminder": true,
       "id": 5
     }
   ]
