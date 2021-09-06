@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "id": 3,
+      "text": "Interview with Bryon the CEO",
+      "day": "September 2nd at 8pm",
+      "reminder": true
+    },
+    {
+      "text": "Finish Traversy Media React Crash Course",
+      "day": "September 5th at 9pm",
+      "reminder": true,
+      "id": 4
+    },
+    {
+      "text": "potato",
+      "day": "tont",
+      "reminder": false,
+      "id": 5
+    }
+  ]
+}

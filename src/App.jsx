@@ -1,34 +1,34 @@
-import { useState } from 'react'
-
+import { useState, useEffect } from 'react'
 import Header from "./components/Header";
 import Task from "./components/Tasks";
 import AddTask from "./components/AddTask";
 
 const App = () => {
   const [showAddTask, setShowAddText] = useState(false);
-  const [tasks, setTasks] = useState([{
-    id: 1,
-    text: 'Finish Online Profiles',
-    day: 'September 2nd at 8pm',
-    reminder: true
-  },
-  {
-    id: 2,
-    text: 'Finish React Traversy Media Crash Course',
-    day: 'September 2nd at 11:59pm',
-    reminder: true
-  },
-  {
-    id: 3,
-    text: 'Interview with Brian the CEO',
-    day: 'September 8th at 12:30pm',
-    reminder: true
+  const [tasks, setTasks] = useState([])
+
+  useEffect(() => {
+    const getTasks = async () => {
+      const tasksFromServer = await fetchTasks()
+      setTasks(tasksFromServer)
+    }    
+
+    getTasks();
+  }, [])
+
+  // fetch tasks
+  const fetchTasks = async() => {
+    const res = await fetch('http://localhost:5000/tasks')
+    const data = await res.json();
+
+    console.log(data)
+    return data;
   }
-])
 
   // functionality for deleting a task
-  const deleteTask = (id) => {
-    console.log('inside delete method')
+  const deleteTask = async (id) => {
+      await fetch(`http://localhost:5000/tasks/${id}`, { method: 'DELETE' });
+    
     setTasks(tasks.filter((taskInList) => taskInList.id !== id))
   }
 
@@ -38,10 +38,22 @@ const App = () => {
   }
 
   // functionality for adding a task to a list
-  const addTask = (task) => {
-    const id = tasks.length + 1;
-    const newTask = { id, ...task }
-    setTasks([...tasks, newTask])
+  const addTask = async (task) => {
+    // const id = tasks.length + 1;
+    // const newTask = { id, ...task }
+    // setTasks([...tasks, newTask])
+
+    const res = await fetch('http://localhost:5000/tasks', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(task) 
+    })
+
+    const data = await res.json();
+
+    setTasks([...tasks, data]);
   }
 
   return (
